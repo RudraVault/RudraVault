@@ -94,6 +94,8 @@
             transition: all var(--transition-normal);
             position: relative;
             overflow: hidden;
+            -webkit-user-drag: none;
+            user-select: none;
         }
 
         .btn-primary {
@@ -151,6 +153,8 @@
             display: flex;
             align-items: center;
             gap: var(--spacing-xs);
+            -webkit-user-drag: none;
+            user-select: none;
         }
 
         .logo::before {
@@ -163,6 +167,8 @@
             width: 3em;
             border: 2px solid var(--primary-accent);
             border-radius: 26%;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .nav-menu {
@@ -178,6 +184,8 @@
             font-weight: 500;
             transition: color var(--transition-fast);
             position: relative;
+            -webkit-user-drag: none;
+            user-select: none;
         }
 
         .nav-link:hover,
@@ -258,7 +266,7 @@
 
         .hero-title {
             font-family: var(--font-primary);
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-size: clamp(2rem, 8vw, 3.2rem);
             font-weight: 900;
             margin-bottom: var(--spacing-md);
             background: var(--gradient-primary);
