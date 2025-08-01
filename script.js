@@ -6,7 +6,6 @@ const navLinks = document.querySelectorAll(".nav-link");
 const scrollTopBtn = document.getElementById("scroll-top");
 const contactForm = document.getElementById("contact-form");
 
-
 // ===== NAVIGATION FUNCTIONALITY =====
 
 // Mobile menu toggle
@@ -133,23 +132,39 @@ contactForm.addEventListener("submit", function (e) {
     submitBtn.disabled = true;
 
     // Simulate API call
-    setTimeout(() => {
-      // Reset button
-      submitBtn.classList.remove("loading");
-      submitBtn.textContent = "Send Secure Message";
-      submitBtn.disabled = false;
+    fetch("https://script.google.com/macros/s/AKfycbxGrAEufgn3paZKM051EpndZRYNCj-nQ1RIRpiyRRDKUrG4tfBMFpFPZSVzOSLbrftU/exec", {
+      method: "POST",
+      mode: "no-cors", // Required to avoid CORS errors
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name.value,
+        email: email.value,
+        message: message.value,
+      }),
+    })
+      .then(() => {
+        // Reset button
+        submitBtn.classList.remove("loading");
+        submitBtn.textContent = "Send Secure Message";
+        submitBtn.disabled = false;
 
-      // Show success message
-      document.getElementById("form-success").style.display = "block";
+        // Show success message
+        document.getElementById("form-success").style.display = "block";
+        contactForm.reset();
 
-      // Reset form
-      contactForm.reset();
-
-      // Hide success message after 5 seconds
-      setTimeout(() => {
-        document.getElementById("form-success").style.display = "none";
-      }, 5000);
-    }, 2000);
+        setTimeout(() => {
+          document.getElementById("form-success").style.display = "none";
+        }, 5000);
+      })
+      .catch((error) => {
+        console.error("Form submission error:", error);
+        submitBtn.classList.remove("loading");
+        submitBtn.textContent = "Send Secure Message";
+        submitBtn.disabled = false;
+        alert("Something went wrong. Please try again later.");
+      });
   }
 });
 
